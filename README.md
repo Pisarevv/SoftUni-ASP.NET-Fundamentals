@@ -1,4 +1,4 @@
-# ![My Skills](https://skillicons.dev/icons?i=cs) SoftUni ASP.NET Fundamentals
+# ![My Skills](https://skillicons.dev/icons?i=dotnet) SoftUni ASP.NET Fundamentals
 
 ## 🧾Description 
 In the "ASP.NET Fundamentals" course, the foundations of important principles embedded in ASP.NET will is laid. Becoming familiar with the basic principles of web development, such as HTTP protocols, sessions, and cookies, as well as asynchronous processing, and also with the MVC pattern by a own web applications that support all the basic functionalities necessary for a modern web application. The use of C# and relational databases in creating such an application will be explored, utilizing MS SQL Server and separating models, views, and controllers for these purposes. Basics of authentication are learnt in order to gain skills for working with users in web applications.
