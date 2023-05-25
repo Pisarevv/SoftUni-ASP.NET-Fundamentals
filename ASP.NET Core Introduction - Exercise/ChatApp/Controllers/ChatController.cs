@@ -24,7 +24,7 @@ public class ChatController : Controller
                        .ToList()
         };
         return View(chatModel);
-    }
+        }
 
     [HttpPost]
     public IActionResult Send(ChatViewModel chat)
