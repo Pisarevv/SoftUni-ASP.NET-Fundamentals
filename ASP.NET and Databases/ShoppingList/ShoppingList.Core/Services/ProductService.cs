@@ -38,7 +38,33 @@ namespace ShoppingList.Core.Services
         }
 
 
-        public async Task CreateAsync(ProductAddModel product)
+        public async Task<ProductFormModel> GetByIdAsync(string id)
+        {
+            return await _context
+                .Products
+                .Where(p => p.Id == id)
+                .Select(p => new ProductFormModel
+                {
+                    Name = p.ProductName,
+                    Price = p.Price,
+                })
+                .FirstOrDefaultAsync();
+          
+        }
+
+        public async Task EditAsync(ProductFormModel product)
+        {
+            var productToEdit = await _context.
+                                Products.
+                                FirstOrDefaultAsync(p => p.Id == product.Id);
+
+            productToEdit.ProductName = product.Name;
+            productToEdit.Price = product.Price;
+
+            _context.SaveChangesAsync();
+        }
+
+        public async Task CreateAsync(ProductFormModel product)
         {
 
             Product newProduct = new Product
@@ -52,5 +78,13 @@ namespace ShoppingList.Core.Services
             await _context.SaveChangesAsync();
            
         }
+
+        public Task Delete(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+      
+       
     }
 }
