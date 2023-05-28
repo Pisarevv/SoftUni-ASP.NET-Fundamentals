@@ -2,6 +2,7 @@
 using ShoppingList.Core.Contracts;
 using ShoppingList.Core.Models;
 using ShoppingList.Infrastructure.Context;
+using ShoppingList.Infrastructure.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,22 @@ namespace ShoppingList.Core.Services
 
 
             return products;
+        }
+
+
+        public async Task CreateAsync(ProductAddModel product)
+        {
+
+            Product newProduct = new Product
+            {
+                Id = Guid.NewGuid().ToString(),
+                ProductName = product.Name,
+                Price = product.Price,
+            };
+
+            await _context.Products.AddAsync(newProduct);
+            await _context.SaveChangesAsync();
+           
         }
     }
 }

@@ -10,5 +10,7 @@ namespace ShoppingList.Core.Contracts
     public interface IProductService
     {
         public Task<ICollection<ProductViewModel>> AllAsync();
+
+        public Task CreateAsync(ProductAddModel product);
     }
 }

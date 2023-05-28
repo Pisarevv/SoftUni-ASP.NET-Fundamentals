@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShoppingList.Core.Contracts;
+using ShoppingList.Core.Models;
 using ShoppingList.Infrastructure.Context;
 
 namespace ShoppingList.Web.Controllers
@@ -18,5 +19,25 @@ namespace ShoppingList.Web.Controllers
             var products = await _productService.AllAsync();
             return View(products);
         }
+
+        public IActionResult Add()
+        {
+            return View(new ProductAddModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(ProductAddModel model)
+        {
+            if(!ModelState.IsValid)
+            {
+                return RedirectToAction("Add");
+            }
+            else
+            {
+                await _productService.CreateAsync(model);
+            }
+            return RedirectToAction("Index");
+        }
+
     }
 }
