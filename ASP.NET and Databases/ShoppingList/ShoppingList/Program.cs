@@ -1,15 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using ShoppingList.Infrastructure.Context;
+
 namespace ShoppingList
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
-
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
-
-            var app = builder.Build();
+           
+            var app = InitializeAppAndServices(args);
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -31,6 +30,21 @@ namespace ShoppingList
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
+        }
+
+        private static WebApplication InitializeAppAndServices(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
+
+            var connectionString = builder.Configuration.GetConnectionString("MsSqlServer");
+
+            // Add services to the container.
+            builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<ShoppingListDbContext>(options =>
+            options.UseSqlServer(connectionString));
+
+            return builder.Build();
+
         }
     }
 }
