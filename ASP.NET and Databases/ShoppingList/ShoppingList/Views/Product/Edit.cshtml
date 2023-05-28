@@ -25,3 +25,9 @@
         <input class="btn btn-primary mt-3" type="submit" value="Edit" />
     </form>
 </div>
+
+@section scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+};

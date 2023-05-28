@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShoppingList.Core.Contracts;
 using ShoppingList.Core.Models;
-using ShoppingList.Infrastructure.Context;
 
 namespace ShoppingList.Web.Controllers
 {
