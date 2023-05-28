@@ -22,15 +22,15 @@ namespace ShoppingList.Web.Controllers
 
         public IActionResult Add()
         {
-            return View(new ProductFormModel());
+            return View(new ProductAddModel());
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(ProductFormModel model)
+        public async Task<IActionResult> Add(ProductAddModel model)
         {
             if(!ModelState.IsValid)
             {
-                return RedirectToAction("Add");
+                return View(model);
             }
             else
             {
@@ -61,6 +61,12 @@ namespace ShoppingList.Web.Controllers
 
             return RedirectToAction("Index");
 
+        }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            await _productService.Delete(id);
+            return RedirectToAction("Index");
         }
 
     }

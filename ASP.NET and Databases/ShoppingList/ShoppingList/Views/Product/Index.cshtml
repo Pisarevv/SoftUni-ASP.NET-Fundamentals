@@ -26,11 +26,7 @@ else
                         <h2>@product.Price</h2>
 
                     <a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-warning">Edit</a>
-                    <form class="mt-2" asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id">
-                        <div class="d-grid gap-2">
-                            <input type="submit" value="Delete" class="btn btn-danger"/> 
-                        </div>
-                    </form>
+                    <a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id" class="btn btn-danger">Delete</a>
                 </div>
             </div>
         </div>

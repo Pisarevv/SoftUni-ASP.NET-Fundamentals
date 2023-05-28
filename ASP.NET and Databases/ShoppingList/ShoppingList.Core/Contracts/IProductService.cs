@@ -12,7 +12,7 @@ namespace ShoppingList.Core.Contracts
     {
         public Task<ICollection<ProductViewModel>> AllAsync();
 
-        public Task CreateAsync(ProductFormModel product);
+        public Task CreateAsync(ProductAddModel product);
 
         public Task<ProductFormModel> GetByIdAsync(string id);
 
