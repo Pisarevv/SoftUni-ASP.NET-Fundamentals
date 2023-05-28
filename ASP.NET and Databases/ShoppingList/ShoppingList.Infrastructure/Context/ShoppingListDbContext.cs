@@ -22,7 +22,7 @@ namespace ShoppingList.Infrastructure.Context
            
         }
 
-        DbSet<Product> Products { get; set; } = null!;
+        public DbSet<Product> Products { get; set; } = null!;
 
         
     }

@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using ShoppingList.Core.Contracts;
+using ShoppingList.Core.Services;
 using ShoppingList.Infrastructure.Context;
 
 namespace ShoppingList
@@ -42,6 +44,8 @@ namespace ShoppingList
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<ShoppingListDbContext>(options =>
             options.UseSqlServer(connectionString));
+
+            builder.Services.AddScoped<IProductService, ProductService>();
 
             return builder.Build();
 
