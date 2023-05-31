@@ -1,4 +1,4 @@
-namespace ForumApp.Web
+namespace Forum.Web
 {
     public class Program
     {

@@ -1,4 +1,4 @@
-﻿namespace Forum.Infrastructure.Models
+﻿namespace Forum.Infrastructure.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
     using static Forum.Common.Validation.ValidationConstants.Post;
@@ -6,7 +6,7 @@
     {
         public Post()
         {
-            this.Id = Guid.NewGuid();
+            Id = Guid.NewGuid();
         }
 
         [Key]
