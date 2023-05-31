@@ -18,8 +18,8 @@
         public string Title { get; set; } = null!;
 
         [Required]
-        [MinLength(MinTitleLenght)]
-        [MaxLength(MaxTitleLenght)]
+        [MinLength(MinContentLength)]
+        [MaxLength(MaxContentLength)]
         public string Content { get; set; } = null!;
     }
 }

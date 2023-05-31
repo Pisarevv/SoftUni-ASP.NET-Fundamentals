@@ -6,7 +6,7 @@ namespace Forum.Infrastructure
 {
     public class ForumDbContext : DbContext
     {
-        protected ForumDbContext(DbContextOptions<ForumDbContext> options)
+        public ForumDbContext(DbContextOptions<ForumDbContext> options)
             :base(options)
         {
 

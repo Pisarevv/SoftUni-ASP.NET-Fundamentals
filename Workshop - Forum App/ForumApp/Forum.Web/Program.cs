@@ -1,3 +1,8 @@
+using Forum.Core.Contracts;
+using Forum.Core.Services;
+using Forum.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+
 namespace Forum.Web
 {
     public class Program
@@ -5,9 +10,14 @@ namespace Forum.Web
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            var connectionString = builder.Configuration.GetConnectionString("Default");
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<ForumDbContext>(options =>
+            options.UseSqlServer(connectionString));
+
+            builder.Services.AddScoped<IPostService,PostService>();
 
             var app = builder.Build();
 
