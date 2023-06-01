@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Forum.Core.Contracts
+﻿namespace Forum.Core.Contracts
 {
+    using Forum.Core.Models.Post;
     public interface IPostService
     {
+        public Task<ICollection<PostViewModel>> GetAllAsync();
     }
 }
