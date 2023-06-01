@@ -1,4 +1,5 @@
 ﻿using Forum.Core.Contracts;
+using Forum.Core.Models.Post;
 using Forum.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,6 +26,24 @@ namespace Forum.Web.Controllers
             {
                 return View(ex.Message);
             }
+        }
+
+        public IActionResult Add()
+        {
+            return View(new PostFormModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(PostFormModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+
+                return View(model);
+            }
+
+            await _postService.Create(model);
+            return RedirectToAction("Index");
         }
     }
 }

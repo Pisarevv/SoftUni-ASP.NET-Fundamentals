@@ -4,5 +4,7 @@
     public interface IPostService
     {
         public Task<ICollection<PostViewModel>> GetAllAsync();
+
+        public Task Create(PostFormModel model);
     }
 }
