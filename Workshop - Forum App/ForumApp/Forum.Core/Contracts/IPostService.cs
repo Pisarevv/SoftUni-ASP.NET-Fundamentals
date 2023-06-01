@@ -14,5 +14,7 @@
 
         public Task UpdateAsync(string id, PostFormModel model);
 
+        public Task Delete(string id);
+
     }
 }

@@ -4,6 +4,7 @@ using Forum.Infrastructure;
 using Forum.Infrastructure.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Forum.Core.Services
 {
     public class PostService : IPostService
@@ -54,6 +55,14 @@ namespace Forum.Core.Services
             Post postToEdit = await GetByIdAsync(id);
             postToEdit.Title = model.Title;
             postToEdit.Content = model.Content;
+
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task Delete(string id)
+        {
+            Post postToDelete = await GetByIdAsync(id);
+            _context.Posts.Remove(postToDelete);
 
             await _context.SaveChangesAsync();
         }

@@ -85,9 +85,35 @@ namespace Forum.Web.Controllers
             catch (Exception ex)
             {
                 return View(ex.Message);
-            }
+            }      
+        }
 
-            
+        public async Task<IActionResult> Delete(string id)
+        {
+            Post model = await _postService.GetByIdAsync(id);
+
+            PostFormModel formModel = new PostFormModel()
+            {
+                Title = model.Title,
+                Content = model.Content
+            };
+
+            return View(formModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id, PostFormModel model)
+        {
+
+            try
+            {
+                await _postService.Delete(id);
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                return View(ex.Message);
+            }
         }
     }
 }
