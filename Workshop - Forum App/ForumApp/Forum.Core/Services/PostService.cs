@@ -32,7 +32,7 @@ namespace Forum.Core.Services
             return allPosts;
         }
 
-        public async Task Create(PostFormModel model)
+        public async Task CreateAsync(PostFormModel model)
         {
             Post postToAdd = new Post()
             {
@@ -44,6 +44,18 @@ namespace Forum.Core.Services
             await _context.SaveChangesAsync();
 
             
+        }
+
+        public async Task<Post> GetByIdAsync(string id)
+        => await _context.Posts.FirstOrDefaultAsync(p => p.Id.ToString() == id);
+
+        public async Task UpdateAsync(string id, PostFormModel model)
+        {
+            Post postToEdit = await GetByIdAsync(id);
+            postToEdit.Title = model.Title;
+            postToEdit.Content = model.Content;
+
+            await _context.SaveChangesAsync();
         }
     }
 }
