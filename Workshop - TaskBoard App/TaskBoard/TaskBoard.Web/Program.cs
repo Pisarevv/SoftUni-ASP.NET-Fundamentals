@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using TaskBoard.Core.Contracts;
+using TaskBoard.Core.Services;
 using TaskBoard.Infrastructure.Data;
 
 namespace TaskBoard.Web
@@ -26,6 +28,8 @@ namespace TaskBoard.Web
                 options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
             });
+
+            builder.Services.AddTransient<IBoardService, BoardService>();
            
             builder.Services.AddControllersWithViews();
 
