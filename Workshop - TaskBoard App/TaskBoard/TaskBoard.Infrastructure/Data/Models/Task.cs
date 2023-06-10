@@ -3,8 +3,8 @@
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using Microsoft.AspNetCore.Identity;
-   
-    using static global::TaskBoard.Common.ValidationConstants.Task;
+
+    using static Common.ValidationConstants.Task;
 
     public class Task
     {

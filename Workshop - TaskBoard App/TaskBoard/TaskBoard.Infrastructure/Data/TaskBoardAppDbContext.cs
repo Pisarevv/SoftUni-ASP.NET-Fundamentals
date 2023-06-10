@@ -21,12 +21,13 @@
         public DbSet<Board> Boards { get; set; } = null!;
 
         
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
+
             builder.ApplyConfigurationsFromAssembly(Assembly.GetAssembly(typeof(TaskBoardAppDbContext)) ?? Assembly.GetExecutingAssembly());
 
             base.OnModelCreating(builder);
+            
         }
     }
 }

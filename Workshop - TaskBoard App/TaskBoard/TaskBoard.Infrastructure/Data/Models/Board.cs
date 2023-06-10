@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    using static global::TaskBoard.Common.ValidationConstants.Board;
+    using static Common.ValidationConstants.Board;
     public class Board
     {
         public Board()

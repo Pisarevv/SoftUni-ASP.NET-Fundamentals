@@ -23,35 +23,35 @@
             ICollection<Task> tasks = new HashSet<Task>()
             {
                 new Task()
-                {
+                {                  
                     Title = "Improve CSS styles",
                     Description = "Implement better styling for all public pages",
                     CreatedOn = DateTime.UtcNow.AddDays(-200),
-                    OwnerId = "0d854fc1-5c0d-4645-b1bc-e486e94cde9b",
+                    OwnerId = "07bf414a-5aba-4b74-b0b8-aa9c2f0d1609",
                     BoardId = 1
                 },
                 new Task()
-                {
+                {                    
                     Title = "Android Client App",
                     Description = "Create Android client App for the RESTful TaskBoard service",
                     CreatedOn = DateTime.UtcNow.AddMonths(-5),
-                    OwnerId = "0d854fc1-5c0d-4645-b1bc-e486e94cde9b",
+                    OwnerId = "07bf414a-5aba-4b74-b0b8-aa9c2f0d1609",
                     BoardId = 1
                 },
                 new Task()
-                {
+                {                    
                     Title = "Desktop Client App",
                     Description = "Create Desktop client App for the RESTful TaskBoard service",
                     CreatedOn = DateTime.UtcNow.AddMonths(-1),
-                    OwnerId = "0d854fc1-5c0d-4645-b1bc-e486e94cde9b",
+                    OwnerId = "07bf414a-5aba-4b74-b0b8-aa9c2f0d1609",
                     BoardId = 2
                 },
                 new Task()
-                {
+                {                  
                     Title = "Create Tasks",
                     Description = "Implement [Create Task] page for adding tasks",
                     CreatedOn = DateTime.UtcNow.AddYears(-1),
-                    OwnerId = "dbc68811-2d8b-4559-97b5-96faaee5e38c",
+                    OwnerId = "fd276457-f3b5-4f2a-a452-11a81bc8764c",
                     BoardId = 3
                 }
             };

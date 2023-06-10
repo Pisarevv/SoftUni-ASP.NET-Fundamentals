@@ -12,7 +12,7 @@ using TaskBoard.Infrastructure.Data;
 namespace TaskBoard.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(TaskBoardAppDbContext))]
-    [Migration("20230610182028_CreateTables")]
+    [Migration("20230610192237_CreateTables")]
     partial class CreateTables
     {
         /// <inheritdoc />
@@ -299,38 +299,38 @@ namespace TaskBoard.Infrastructure.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("73e4828e-be7e-42f1-aac1-3aaf910be1eb"),
+                            Id = new Guid("36bf2318-66c9-4687-8ef0-e8b5d626a411"),
                             BoardId = 1,
-                            CreatedOn = new DateTime(2022, 11, 22, 18, 20, 28, 34, DateTimeKind.Utc).AddTicks(1000),
+                            CreatedOn = new DateTime(2022, 11, 22, 19, 22, 37, 454, DateTimeKind.Utc).AddTicks(3374),
                             Description = "Implement better styling for all public pages",
-                            OwnerId = "0d854fc1-5c0d-4645-b1bc-e486e94cde9b",
+                            OwnerId = "07bf414a-5aba-4b74-b0b8-aa9c2f0d1609",
                             Title = "Improve CSS styles"
                         },
                         new
                         {
-                            Id = new Guid("5fb6f564-309f-4215-a92d-854b5c6d6992"),
+                            Id = new Guid("144d9693-32d1-4629-bfc7-f4f56206699f"),
                             BoardId = 1,
-                            CreatedOn = new DateTime(2023, 1, 10, 18, 20, 28, 34, DateTimeKind.Utc).AddTicks(1028),
+                            CreatedOn = new DateTime(2023, 1, 10, 19, 22, 37, 454, DateTimeKind.Utc).AddTicks(3397),
                             Description = "Create Android client App for the RESTful TaskBoard service",
-                            OwnerId = "0d854fc1-5c0d-4645-b1bc-e486e94cde9b",
+                            OwnerId = "07bf414a-5aba-4b74-b0b8-aa9c2f0d1609",
                             Title = "Android Client App"
                         },
                         new
                         {
-                            Id = new Guid("bc32e3f4-a18b-4c80-b337-090d7dc3e0a7"),
+                            Id = new Guid("cf52f08d-82a0-4a39-a3b8-c6dbbbef8dec"),
                             BoardId = 2,
-                            CreatedOn = new DateTime(2023, 5, 10, 18, 20, 28, 34, DateTimeKind.Utc).AddTicks(1034),
+                            CreatedOn = new DateTime(2023, 5, 10, 19, 22, 37, 454, DateTimeKind.Utc).AddTicks(3401),
                             Description = "Create Desktop client App for the RESTful TaskBoard service",
-                            OwnerId = "0d854fc1-5c0d-4645-b1bc-e486e94cde9b",
+                            OwnerId = "07bf414a-5aba-4b74-b0b8-aa9c2f0d1609",
                             Title = "Desktop Client App"
                         },
                         new
                         {
-                            Id = new Guid("e4f6643e-0227-4243-8109-d85d61a76752"),
+                            Id = new Guid("19aa65ad-9c0c-460b-ba59-e846b6b5afb9"),
                             BoardId = 3,
-                            CreatedOn = new DateTime(2022, 6, 10, 18, 20, 28, 34, DateTimeKind.Utc).AddTicks(1036),
+                            CreatedOn = new DateTime(2022, 6, 10, 19, 22, 37, 454, DateTimeKind.Utc).AddTicks(3403),
                             Description = "Implement [Create Task] page for adding tasks",
-                            OwnerId = "dbc68811-2d8b-4559-97b5-96faaee5e38c",
+                            OwnerId = "fd276457-f3b5-4f2a-a452-11a81bc8764c",
                             Title = "Create Tasks"
                         });
                 });
