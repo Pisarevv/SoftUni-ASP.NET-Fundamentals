@@ -1,15 +1,19 @@
 ﻿namespace TaskBoard.Infrastructure.Data.Models
 {
-    using Microsoft.AspNetCore.Identity;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using static TaskBoard.Common.ValidationConstants.Task;
+    using Microsoft.AspNetCore.Identity;
+   
+    using static global::TaskBoard.Common.ValidationConstants.Task;
+
     public class Task
     {
         public Task()
         {
             this.Id = Guid.NewGuid();
         }
+
+        [Key]
         public Guid Id { get; set; }
 
         [Required]
@@ -25,14 +29,14 @@
         public DateTime CreatedOn { get; set; }
 
         [ForeignKey(nameof(Board))]
-        public int? BoardId { get; set; }
+        public int BoardId { get; set; }
 
-        public Board? Board { get; set; }
+        public virtual Board Board { get; set; } = null!;
 
         [Required]
         [ForeignKey(nameof(Owner))]
         public string OwnerId { get; set; } = null!;
 
-        public IdentityUser Owner { get; set; } = null!;
+        public virtual IdentityUser Owner { get; set; } = null!;
     }
 }

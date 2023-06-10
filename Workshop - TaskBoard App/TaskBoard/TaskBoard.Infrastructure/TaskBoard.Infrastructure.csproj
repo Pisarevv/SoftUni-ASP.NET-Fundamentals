@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Configuration\" />
+    <ProjectReference Include="..\TaskBoard.Common\TaskBoard.Common.csproj" />
   </ItemGroup>
 
 </Project>
