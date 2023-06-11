@@ -69,6 +69,7 @@
             }
         }
 
+        [HttpGet]
         public async Task<IActionResult> Details(string id)
         {   
             try
@@ -76,6 +77,42 @@
                 TaskDetailsViewModel taskDetails = await taskService.GetDetailsAsync(id);
 
                 return View(taskDetails);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, "An error occurred while processing your request.");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+            try
+            {
+                TaskFormModel model = await taskService.GetById(id);
+
+                return View(model);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, "An error occurred while processing your request.");
+            }
+        }
+
+        public async Task<IActionResult> Edit(string id, TaskFormModel inputModel)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    var boards = await boardService.GetBoardsForSelectAsync();
+                    inputModel.Boards = boards;
+                    return View(inputModel);
+                }
+
+                await taskService.EditAsync(id, inputModel);
+
+                return RedirectToAction("All", "Board");
             }
             catch (Exception)
             {

@@ -10,9 +10,11 @@ namespace TaskBoard.Core.Services
     public class TaskService : ITaskService
     {
         private readonly TaskBoardAppDbContext dbContext;
-        public TaskService(TaskBoardAppDbContext dbContext)
+        private readonly IBoardService boardService;
+        public TaskService(TaskBoardAppDbContext dbContext, IBoardService boardService)
         {
             this.dbContext = dbContext;
+            this.boardService = boardService;
         }
 
         public async Task AddAsync(string OwnerId,TaskFormModel inputModel)
@@ -28,6 +30,52 @@ namespace TaskBoard.Core.Services
 
             await dbContext.Tasks.AddAsync(newTask);
             await dbContext.SaveChangesAsync();
+        }
+
+        public async Task EditAsync(string taskId, TaskFormModel inputModel)
+        {
+            Infrastructure.Data.Models.Task? modelToEdit = await dbContext.Tasks
+                               .FindAsync(Guid.Parse(taskId)); 
+
+            if(modelToEdit == null)
+            {
+                throw new Exception("Task cannot be found");
+            }
+
+            modelToEdit.Title = inputModel.Title;
+            modelToEdit.Description = inputModel.Description;
+
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task<TaskFormModel> GetById(string taskId)
+        {
+            try
+            {
+                var foundTask = await dbContext.Tasks
+                               .FindAsync(Guid.Parse(taskId));
+
+                if(foundTask == null)
+                {
+                    throw new Exception("Task cannot be found");
+                }
+
+                var boards = await boardService.GetBoardsForSelectAsync();
+
+                TaskFormModel newModel = new TaskFormModel
+                {
+                    Title = foundTask.Title,
+                    Description = foundTask.Description,
+                    BoardId = foundTask.BoardId,
+                    Boards = boards
+                };
+
+                return newModel;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<TaskDetailsViewModel> GetDetailsAsync(string taskId)
