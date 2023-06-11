@@ -10,6 +10,10 @@ namespace TaskBoard.Core.Contracts
 
         public Task EditAsync(string taskId, TaskFormModel inputModel);
 
-        public Task<TaskFormModel> GetById(string taskId);
+        public Task<TaskFormModel> GetFormModelByIdAsync(string taskId);
+
+        public Task<TaskViewModel> GetViewModelByIdAsync(string taskId);
+
+        public Task DeleteAsync(string taskId, TaskViewModel model);
     }
 }

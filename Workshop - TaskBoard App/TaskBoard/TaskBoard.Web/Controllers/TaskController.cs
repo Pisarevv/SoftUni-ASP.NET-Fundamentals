@@ -23,10 +23,8 @@
         {
             try
             {
-                TaskFormModel model = new TaskFormModel()
-                {
-
-                };
+                TaskFormModel model = new TaskFormModel();
+               
                 var boards = await boardService.GetBoardsForSelectAsync();
                 model.Boards = boards;
 
@@ -89,7 +87,7 @@
         {
             try
             {
-                TaskFormModel model = await taskService.GetById(id);
+                TaskFormModel model = await taskService.GetFormModelByIdAsync(id);
 
                 return View(model);
             }
@@ -111,6 +109,43 @@
                 }
 
                 await taskService.EditAsync(id, inputModel);
+
+                return RedirectToAction("All", "Board");
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, "An error occurred while processing your request.");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+            try
+            {
+                TaskViewModel taskModel = await taskService.GetViewModelByIdAsync(id);
+
+                string currentUser = this.User.GetUser();
+
+                if(taskModel.Owner != currentUser)
+                {
+                    return Unauthorized();
+                }
+
+                return View(taskModel);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, "An error occurred while processing your request.");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id, TaskViewModel taskViewModel)
+        {
+            try
+            {
+                await taskService.DeleteAsync(id, taskViewModel);
 
                 return RedirectToAction("All", "Board");
             }

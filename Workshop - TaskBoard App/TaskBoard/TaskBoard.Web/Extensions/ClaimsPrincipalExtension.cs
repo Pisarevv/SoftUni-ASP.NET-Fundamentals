@@ -7,5 +7,10 @@
         {
             return user.FindFirstValue(ClaimTypes.NameIdentifier);
         }
+
+        public static string GetUser(this ClaimsPrincipal user)
+        {
+            return user.FindFirstValue(ClaimTypes.Name);
+        }
     }
 }

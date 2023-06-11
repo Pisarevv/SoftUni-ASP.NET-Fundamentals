@@ -32,6 +32,21 @@ namespace TaskBoard.Core.Services
             await dbContext.SaveChangesAsync();
         }
 
+        public async Task DeleteAsync(string taskId, TaskViewModel model)
+        {
+            Infrastructure.Data.Models.Task? modelToDelete = await dbContext.Tasks
+                               .FindAsync(Guid.Parse(taskId));
+
+            if (modelToDelete == null)
+            {
+                throw new Exception("Task cannot be found");
+            }
+
+            dbContext.Tasks.Remove(modelToDelete);
+            await dbContext.SaveChangesAsync();
+
+        }
+
         public async Task EditAsync(string taskId, TaskFormModel inputModel)
         {
             Infrastructure.Data.Models.Task? modelToEdit = await dbContext.Tasks
@@ -48,7 +63,7 @@ namespace TaskBoard.Core.Services
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task<TaskFormModel> GetById(string taskId)
+        public async Task<TaskFormModel> GetFormModelByIdAsync(string taskId)
         {
             try
             {
@@ -106,6 +121,34 @@ namespace TaskBoard.Core.Services
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        public async Task<TaskViewModel> GetViewModelByIdAsync(string taskId)
+        {
+            try
+            {
+                var foundTask = await dbContext.Tasks
+                               .Select(t => new TaskViewModel
+                               {
+                                   Id = t.Id.ToString(),
+                                   Title = t.Title,
+                                   Description = t.Description,
+                                   Owner = t.Owner.UserName
+                               })
+                               .FirstOrDefaultAsync(t => t.Id == taskId);
+
+                if (foundTask == null)
+                {
+                    throw new Exception("Task cannot be found");
+                }
+
+
+                return foundTask;
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }
