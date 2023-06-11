@@ -21,38 +21,52 @@
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            TaskFormModel model = new TaskFormModel()
+            try
             {
-               
-            };
-            var boards = await boardService.GetBoardsForSelectAsync();
-            model.Boards = boards;
+                TaskFormModel model = new TaskFormModel()
+                {
 
-            return View(model);
+                };
+                var boards = await boardService.GetBoardsForSelectAsync();
+                model.Boards = boards;
+
+                return View(model);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status400BadRequest, "An error occurred while processing your request.");
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(TaskFormModel inputModel)
         {
-            bool boardExist = await boardService.DoesExists(inputModel.BoardId);
-            if (!boardExist)
+            try
             {
-                ModelState.AddModelError(nameof(inputModel.BoardId), "Board does not exist");
-            }
+                bool boardExist = await boardService.DoesExists(inputModel.BoardId);
+                if (!boardExist)
+                {
+                    ModelState.AddModelError(nameof(inputModel.BoardId), "Board does not exist");
+                }
 
-            if(!ModelState.IsValid)
+                if (!ModelState.IsValid)
+                {
+                    var boards = await boardService.GetBoardsForSelectAsync();
+                    inputModel.Boards = boards;
+                    return View(inputModel);
+                }
+
+                string currentUserId = this.User.GetId();
+
+                await taskService.Add(currentUserId, inputModel);
+
+                return RedirectToAction("All", "Board");
+            }
+            catch (Exception)
             {
-                var boards = await boardService.GetBoardsForSelectAsync();
-                inputModel.Boards = boards;
-                return View(inputModel);
+                return StatusCode(StatusCodes.Status400BadRequest, "An error occurred while processing your request.");
             }
-
-            string currentUserId = this.User.GetId();
-
-            await taskService.Add(currentUserId, inputModel);
-
-
-            return RedirectToAction("All", "Board");
         }
     }
 }

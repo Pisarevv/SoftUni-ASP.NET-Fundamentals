@@ -21,7 +21,7 @@ namespace TaskBoard.Web.Controllers
             }
             catch (Exception)
             {
-                return RedirectToAction("Index", "Home");
+                return StatusCode(StatusCodes.Status400BadRequest, "An error occurred while processing your request.");
             }
 
         }

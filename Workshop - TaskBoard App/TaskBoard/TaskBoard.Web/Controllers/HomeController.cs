@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using TaskBoard.Core.Models;
 
 namespace TaskBoard.Web.Controllers
 {
