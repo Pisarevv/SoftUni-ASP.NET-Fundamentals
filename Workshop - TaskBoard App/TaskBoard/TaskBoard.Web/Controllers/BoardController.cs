@@ -17,6 +17,7 @@ namespace TaskBoard.Web.Controllers
             try
             {
                 var boards = await boardService.GetAllAsync();
+
                 return View(boards);
             }
             catch (Exception)

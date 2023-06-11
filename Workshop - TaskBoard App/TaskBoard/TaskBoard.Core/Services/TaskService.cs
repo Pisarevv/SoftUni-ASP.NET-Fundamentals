@@ -59,6 +59,7 @@ namespace TaskBoard.Core.Services
 
             modelToEdit.Title = inputModel.Title;
             modelToEdit.Description = inputModel.Description;
+            modelToEdit.BoardId = inputModel.BoardId;
 
             await dbContext.SaveChangesAsync();
         }
@@ -151,6 +152,26 @@ namespace TaskBoard.Core.Services
             {
                 throw;
             }
+        }
+
+        public async Task<int> TaskCountInBoardAsync(string boardName)
+        {
+            return await dbContext.Tasks
+                         .Where(t => t.Board.Name == boardName)
+                         .CountAsync();
+        }
+
+        public async Task<int> AllTasksCountAsync()
+        {
+            return await dbContext.Tasks
+                         .CountAsync();
+        }
+
+        public async Task<int> GetUserTasksGount(string userId)
+        {
+            return await dbContext.Tasks
+                        .Where(t => t.OwnerId == userId)
+                        .CountAsync();
         }
     }
 }

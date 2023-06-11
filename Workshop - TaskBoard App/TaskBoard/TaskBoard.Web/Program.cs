@@ -29,6 +29,11 @@ namespace TaskBoard.Web
                 options.Password.RequireLowercase = false;
             });
 
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Identity/Account/Login";
+            });
+
             builder.Services.AddTransient<IBoardService, BoardService>();
             builder.Services.AddTransient<ITaskService, TaskService>();
            

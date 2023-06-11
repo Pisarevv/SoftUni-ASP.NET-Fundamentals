@@ -11,7 +11,7 @@
         private readonly TaskBoardAppDbContext dbContext;
         public BoardService(TaskBoardAppDbContext dbContext) 
         { 
-            this.dbContext = dbContext;
+            this.dbContext = dbContext;         
         }
 
         public async Task<IEnumerable<BoardViewModel>> GetAllAsync()
@@ -50,6 +50,34 @@
         {
             return await dbContext.Boards
                    .AnyAsync(b => b.Id ==  id);
+        }
+
+        public async Task<ICollection<string>> GetBoardNamesAsync()
+        {
+            return await dbContext.Boards
+                         .Select(b => b.Name)
+                         .Distinct()
+                         .ToListAsync();
+                      
+        }
+
+        public async Task<ICollection<HomeBoardModel>> GetHomeBoardsAsync()
+        {
+            var boards = await GetBoardNamesAsync();
+
+            ICollection<HomeBoardModel> result = new List<HomeBoardModel>();
+
+            foreach(var boardName in boards)
+            {
+                HomeBoardModel tasksInBoard = new HomeBoardModel
+                {
+                    BoardName = boardName
+                };
+
+                result.Add(tasksInBoard);
+            }
+
+            return result;
         }
     }
 }

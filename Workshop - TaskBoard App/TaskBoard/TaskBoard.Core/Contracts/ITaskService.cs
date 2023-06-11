@@ -15,5 +15,11 @@ namespace TaskBoard.Core.Contracts
         public Task<TaskViewModel> GetViewModelByIdAsync(string taskId);
 
         public Task DeleteAsync(string taskId, TaskViewModel model);
+
+        public Task<int> TaskCountInBoardAsync(string boardName);
+
+        public Task<int> AllTasksCountAsync();
+
+        public Task<int> GetUserTasksGount(string userId);
     }
 }
