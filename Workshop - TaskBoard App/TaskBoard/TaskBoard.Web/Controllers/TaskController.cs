@@ -59,9 +59,23 @@
 
                 string currentUserId = this.User.GetId();
 
-                await taskService.Add(currentUserId, inputModel);
+                await taskService.AddAsync(currentUserId, inputModel);
 
                 return RedirectToAction("All", "Board");
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, "An error occurred while processing your request.");
+            }
+        }
+
+        public async Task<IActionResult> Details(string id)
+        {   
+            try
+            {
+                TaskDetailsViewModel taskDetails = await taskService.GetDetailsAsync(id);
+
+                return View(taskDetails);
             }
             catch (Exception)
             {
