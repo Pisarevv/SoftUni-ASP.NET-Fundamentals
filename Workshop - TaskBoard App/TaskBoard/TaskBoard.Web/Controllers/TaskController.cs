@@ -1,10 +1,12 @@
 ﻿namespace TaskBoard.Web.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using TaskBoard.Core.Contracts;
     using TaskBoard.Core.Models.Task;
     using TaskBoard.Web.Extensions;
 
+    [Authorize]
     public class TaskController : Controller
     {
         private readonly IBoardService boardService;
