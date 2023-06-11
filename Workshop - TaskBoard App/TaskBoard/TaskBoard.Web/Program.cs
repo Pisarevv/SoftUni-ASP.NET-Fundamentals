@@ -30,6 +30,7 @@ namespace TaskBoard.Web
             });
 
             builder.Services.AddTransient<IBoardService, BoardService>();
+            builder.Services.AddTransient<ITaskService, TaskService>();
            
             builder.Services.AddControllersWithViews();
 

@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TaskBoard.Core.Models.Board;
 
 namespace TaskBoard.Core.Contracts
 {
     public interface IBoardService
     {
+        public Task<IEnumerable<BoardViewModel>> GetAllAsync();
+
+        public Task<IEnumerable<BoardSelectViewModel>> GetBoardsForSelectAsync();
+
+        public Task<bool> DoesExists(int id);
     }
 }

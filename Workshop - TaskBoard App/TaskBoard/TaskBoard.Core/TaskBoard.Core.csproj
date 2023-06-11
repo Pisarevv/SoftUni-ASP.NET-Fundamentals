@@ -11,8 +11,4 @@
     <ProjectReference Include="..\TaskBoard.Infrastructure\TaskBoard.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Contracts\" />
-  </ItemGroup>
-
 </Project>
