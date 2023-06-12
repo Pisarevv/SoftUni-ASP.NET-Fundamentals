@@ -1,5 +1,6 @@
 ﻿namespace Library.Data.Models
 {
+    using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using static Common.ValidationConstants.Book;
@@ -28,6 +29,7 @@
 
         [Required]
         [Range(MinRating,MaxRating)]
+        [Precision(18,2)]
         public decimal Rating { get; set; }
 
         [Required]
@@ -37,6 +39,7 @@
         [Required]
         public Category Category { get; set; } = null!;
 
-        public IdentityUserBook UsersBooks { get; set; } = null!;
-    }
+        public ICollection<IdentityUserBook> UsersBooks { get; set; } = null!;
+
+     }
 }

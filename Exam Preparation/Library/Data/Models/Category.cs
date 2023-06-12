@@ -8,7 +8,7 @@
         {
             this.Books = new HashSet<Book>();
         }
-
+            
         [Key]
         public int Id { get; set; }
 
@@ -17,6 +17,6 @@
         [MaxLength(MaxNameLength)]
         public string Name { get; set; } = null!;
 
-        public ICollection<Book> Books { get; set; }
+        public ICollection<Book> Books { get; set; } 
     }
 }
