@@ -10,6 +10,8 @@ namespace Library.Contracts
 
         public Task AddBookToUserCollection(string userId, int bookId);
 
+        public Task RemoveBookFromUserCollection(string userId, int bookId);
+
         public Task<bool> DoesUserHaveBook(string userId, int bookId);
     }
 }

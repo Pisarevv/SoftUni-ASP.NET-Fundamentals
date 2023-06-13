@@ -29,6 +29,18 @@ namespace Library.Services
             await dbContext.SaveChangesAsync();
         }
 
+        public async Task RemoveBookFromUserCollection(string userId, int bookId)
+        {
+            IdentityUserBook? bookToRemove = await dbContext.IdentitiesUsers
+                                                  .FirstOrDefaultAsync(b => b.CollectorId == userId && b.BookId == bookId);
+
+            if(bookToRemove != null)
+            {
+                dbContext.IdentitiesUsers.Remove(bookToRemove);
+                await dbContext.SaveChangesAsync();
+            }
+
+        }
         public async Task<bool> DoesUserHaveBook(string userId, int bookId)
         {
             return await dbContext.IdentitiesUsers
@@ -68,5 +80,7 @@ namespace Library.Services
                          .ToListAsync();
                          
         }
+
+      
     }
 }
