@@ -11,6 +11,12 @@ namespace Library.Data
         {
         }
 
+        public DbSet<Book> Books { get; set; } = null!;
+
+        public DbSet<Category> Categories { get; set; } = null!;
+
+        public DbSet<IdentityUserBook> IdentitiesUsers { get; set; } = null!;
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<IdentityUserBook>()

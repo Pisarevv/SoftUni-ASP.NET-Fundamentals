@@ -1,4 +1,5 @@
 ﻿using Library.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,6 +9,11 @@ namespace Library.Controllers
     {
         public IActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("All", "Book");
+            }
+
             return View();
         }
 
