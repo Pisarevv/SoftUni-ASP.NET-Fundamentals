@@ -44,6 +44,33 @@ namespace Library.Controllers
             }
            
         }
-        
+
+        public async Task<IActionResult> AddToCollection(int id)
+        {
+            try
+            {
+                var currUserId = User.GetId();
+
+                bool userHaveBook = await bookService.DoesUserHaveBook(currUserId, id);
+
+                if(userHaveBook)
+                {
+                    return RedirectToAction("All", "Book");
+                }
+
+                await bookService.AddBookToUserCollection(currUserId, id);
+
+                return RedirectToAction("All", "Book");
+
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, "An error occurred while processing your request.");
+            }
+        }
+
+
+
+
     }
 }

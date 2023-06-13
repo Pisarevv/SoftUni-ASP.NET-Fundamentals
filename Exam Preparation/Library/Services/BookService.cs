@@ -3,6 +3,7 @@ using Library.Data;
 using Library.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Library.Data.Models;
 
 namespace Library.Services
 {
@@ -14,6 +15,26 @@ namespace Library.Services
         {
             this.dbContext = dbContext;
         }
+
+        public async Task AddBookToUserCollection(string userId, int bookId)
+        {
+            IdentityUserBook userBook = new IdentityUserBook()
+            {
+                CollectorId = userId,
+                BookId = bookId
+            };
+
+            await dbContext.IdentitiesUsers
+                         .AddAsync(userBook);
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task<bool> DoesUserHaveBook(string userId, int bookId)
+        {
+            return await dbContext.IdentitiesUsers
+                         .AnyAsync(b => b.CollectorId == userId && b.BookId == bookId);
+        }
+
         public async Task<ICollection<AllViewBookModel>> GetAllAsync()
         {
             return await dbContext.Books
