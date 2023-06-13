@@ -60,7 +60,7 @@ namespace Library.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Book");
+                    b.ToTable("Books");
 
                     b.HasData(
                         new
@@ -90,7 +90,7 @@ namespace Library.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -132,7 +132,7 @@ namespace Library.Data.Migrations
 
                     b.HasIndex("CollectorId");
 
-                    b.ToTable("IdentityUserBook");
+                    b.ToTable("IdentitiesUsers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
