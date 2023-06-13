@@ -2,6 +2,7 @@
 using Library.Data;
 using Library.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Library.Services
 {
@@ -13,7 +14,7 @@ namespace Library.Services
         {
             this.dbContext = dbContext;
         }
-        public async Task<ICollection<AllViewBookModel>> GetAll()
+        public async Task<ICollection<AllViewBookModel>> GetAllAsync()
         {
             return await dbContext.Books
                          .AsNoTracking()
@@ -27,6 +28,24 @@ namespace Library.Services
                              ImageUrl = b.ImageUrl
                          })
                          .ToListAsync();
+        }
+
+        public async Task<ICollection<UserBookViewModel>> GetUserBooksAsync(string userId)
+        {
+            return await dbContext.IdentitiesUsers
+                         .AsNoTracking()
+                         .Where(u => u.CollectorId == userId)
+                         .Select(b => new UserBookViewModel
+                         {
+                             Id = b.Book.Id,
+                             Author = b.Book.Author,
+                             Category = b.Book.Category.Name,
+                             Title = b.Book.Title,
+                             ImageUrl = b.Book.ImageUrl,
+                             Description = b.Book.Description
+                         })                        
+                         .ToListAsync();
+                         
         }
     }
 }
