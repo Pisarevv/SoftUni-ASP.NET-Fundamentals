@@ -1,6 +1,6 @@
-﻿namespace Library.Models
+﻿namespace Library.Models.Book
 {
-    public class AllViewBookModel
+    public class UserBookViewModel
     {
         public int Id { get; set; }
 
@@ -8,10 +8,11 @@
 
         public string Author { get; set; } = null!;
 
+        public string Description { get; set; } = null!;
+
         public string Category { get; set; } = null!;
 
         public string ImageUrl { get; set; } = null!;
 
-        public string Rating { get; set; } = null!;
     }
 }

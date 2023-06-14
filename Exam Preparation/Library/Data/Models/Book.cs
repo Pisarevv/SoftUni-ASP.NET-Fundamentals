@@ -28,7 +28,7 @@
         public string ImageUrl { get; set; } = null!;
 
         [Required]
-        [Range(MinRating,MaxRating)]
+        [Range((double)MinRating, (double)MaxRating)]
         [Precision(18,2)]
         public decimal Rating { get; set; }
 

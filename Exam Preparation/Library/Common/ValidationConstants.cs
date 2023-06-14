@@ -10,8 +10,8 @@
             public const int MaxAuthorNameLength = 50;
             public const int MinDescriptionLength = 5;
             public const int MaxDescriptionLength = 5000;
-            public const double MinRating = 0;
-            public const double MaxRating = 10.00;
+            public const decimal MinRating = 0m;
+            public const decimal MaxRating = 10.00m;
         }
 
         public static class Category

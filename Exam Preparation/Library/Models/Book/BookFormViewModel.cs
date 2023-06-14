@@ -1,12 +1,13 @@
-﻿namespace Library.Models;
+﻿namespace Library.Models.Book;
 using System.ComponentModel.DataAnnotations;
+using Library.Models.Category;
 using static Common.ValidationConstants.Book;
 
 public class BookFormViewModel
 {
     public BookFormViewModel()
     {
-         this.Categories = new List<CategoryViewModel>();
+        Categories = new List<CategoryViewModel>();
     }
 
 
@@ -33,6 +34,6 @@ public class BookFormViewModel
 
     public int CategoryId { get; set; }
 
-    public ICollection<CategoryViewModel> Categories { get; set; } 
+    public ICollection<CategoryViewModel> Categories { get; set; }
 
 }
