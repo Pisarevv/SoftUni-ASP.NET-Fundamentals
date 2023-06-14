@@ -13,5 +13,7 @@
         public string ImageUrl { get; set; } = null!;
 
         public string Rating { get; set; } = null!;
+
+        public string CollectorId { get; set; } = null!;
     }
 }

@@ -35,7 +35,7 @@
             IdentityUserBook? bookToRemove = await dbContext.IdentitiesUsers
                                                   .FirstOrDefaultAsync(b => b.CollectorId == userId && b.BookId == bookId);
 
-            if(bookToRemove != null)
+            if (bookToRemove != null)
             {
                 dbContext.IdentitiesUsers.Remove(bookToRemove);
                 await dbContext.SaveChangesAsync();
@@ -59,7 +59,7 @@
                              Category = b.Category.Name,
                              Title = b.Title,
                              Rating = b.Rating.ToString(),
-                             ImageUrl = b.ImageUrl
+                             ImageUrl = b.ImageUrl,
                          })
                          .ToListAsync();
         }
@@ -77,9 +77,9 @@
                              Title = b.Book.Title,
                              ImageUrl = b.Book.ImageUrl,
                              Description = b.Book.Description
-                         })                        
+                         })
                          .ToListAsync();
-                         
+
         }
 
         public async Task AddBookAsync(BookFormViewModel model)
@@ -96,6 +96,38 @@
 
             await dbContext.AddAsync(bookToAdd);
             await dbContext.SaveChangesAsync();
+        }
+
+        public async Task EditAsync(int id,BookFormViewModel model)
+        {
+            Book bookToEdit = await dbContext.Books
+                              .FirstAsync(b => b.Id == id);
+
+            bookToEdit.Author = model.Author;
+            bookToEdit.Rating = DecimalToGlobalStandard(model.Rating);
+            bookToEdit.CategoryId = model.CategoryId;
+            bookToEdit.Description = model.Description;
+            bookToEdit.ImageUrl = model.Url;
+            bookToEdit.Title = model.Title;
+
+            dbContext.SaveChangesAsync();
+        }
+
+        public async Task<BookFormViewModel> GetByIdAync(int id)
+        {
+            return await dbContext.Books
+                         .Where(u => u.Id == id)
+                         .Select(u => new BookFormViewModel
+                         {
+                             Author = u.Author,
+                             CategoryId = u.CategoryId,
+                             Title = u.Title,
+                             Description = u.Description,
+                             Rating = u.Rating.ToString(),
+                             Url = u.ImageUrl
+                            
+                         })
+                         .FirstAsync();
         }
     }
 }

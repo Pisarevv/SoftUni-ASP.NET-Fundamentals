@@ -15,5 +15,10 @@ namespace Library.Contracts
         public Task<bool> DoesUserHaveBookAsync(string userId, int bookId);
 
         public Task AddBookAsync(BookFormViewModel model);
+
+        public Task EditAsync(int id, BookFormViewModel model);
+
+        public Task<BookFormViewModel> GetByIdAync(int id);
+
     }
 }

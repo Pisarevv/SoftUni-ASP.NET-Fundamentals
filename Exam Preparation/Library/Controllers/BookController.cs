@@ -113,7 +113,7 @@
             catch (Exception)
             {
 
-                throw;
+                return StatusCode(StatusCodes.Status400BadRequest, "An error occurred while processing your request.");
             }
         }
 
@@ -148,10 +148,43 @@
             catch (Exception)
             {
 
-                throw;
+                return StatusCode(StatusCodes.Status400BadRequest, "An error occurred while processing your request.");
             }
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            try
+            {
+                BookFormViewModel bookModel = await bookService.GetByIdAync(id);
+                ICollection<CategoryViewModel> categories = await categoryService.GetAllAsync();
+                bookModel.Categories = categories;
+
+                return View(bookModel);
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status400BadRequest, "An error occurred while processing your request.");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, BookFormViewModel model)
+        {
+            try
+            {
+                await bookService.EditAsync(id,model);
+
+                return RedirectToAction("All", "Book");
+            }
+            catch (Exception)
+            {
+
+                return StatusCode(StatusCodes.Status400BadRequest, "An error occurred while processing your request.");
+            }
+        }
 
 
     }
