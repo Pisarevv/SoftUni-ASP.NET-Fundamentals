@@ -1,6 +1,6 @@
 ﻿namespace Library.Controllers
 {
-    using Library.Models;
+    using Library.Models.Error;
     using Microsoft.AspNetCore.Mvc;
     using System.Diagnostics;
 

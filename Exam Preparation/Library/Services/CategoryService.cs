@@ -1,6 +1,6 @@
 ﻿using Library.Contracts;
 using Library.Data;
-using Library.Models;
+using Library.Models.Category;
 using Microsoft.EntityFrameworkCore;
 
 namespace Library.Services;
