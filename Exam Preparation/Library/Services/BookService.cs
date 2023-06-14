@@ -1,12 +1,13 @@
-﻿using Library.Contracts;
-using Library.Data;
-using Library.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc;
-using Library.Data.Models;
-
-namespace Library.Services
+﻿namespace Library.Services
 {
+    using Library.Contracts;
+    using Library.Data;
+    using Library.Data.Models;
+    using Library.Models;
+    using Microsoft.EntityFrameworkCore;
+    using static Extensions.FormattingMethods;
+
+
     public class BookService : IBookService
     {
         private readonly LibraryDbContext dbContext;
@@ -16,7 +17,7 @@ namespace Library.Services
             this.dbContext = dbContext;
         }
 
-        public async Task AddBookToUserCollection(string userId, int bookId)
+        public async Task AddBookToUserCollectionAsync(string userId, int bookId)
         {
             IdentityUserBook userBook = new IdentityUserBook()
             {
@@ -29,7 +30,7 @@ namespace Library.Services
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task RemoveBookFromUserCollection(string userId, int bookId)
+        public async Task RemoveBookFromUserCollectionAsync(string userId, int bookId)
         {
             IdentityUserBook? bookToRemove = await dbContext.IdentitiesUsers
                                                   .FirstOrDefaultAsync(b => b.CollectorId == userId && b.BookId == bookId);
@@ -41,7 +42,7 @@ namespace Library.Services
             }
 
         }
-        public async Task<bool> DoesUserHaveBook(string userId, int bookId)
+        public async Task<bool> DoesUserHaveBookAsync(string userId, int bookId)
         {
             return await dbContext.IdentitiesUsers
                          .AnyAsync(b => b.CollectorId == userId && b.BookId == bookId);
@@ -81,6 +82,20 @@ namespace Library.Services
                          
         }
 
-      
+        public async Task AddBookAsync(BookFormViewModel model)
+        {
+            Book bookToAdd = new Book()
+            {
+                Author = model.Author,
+                CategoryId = model.CategoryId,
+                Title = model.Title,
+                Description = model.Description,
+                Rating = DecimalToGlobalStandard(model.Rating),
+                ImageUrl = model.Url
+            };
+
+            await dbContext.AddAsync(bookToAdd);
+            await dbContext.SaveChangesAsync();
+        }
     }
 }

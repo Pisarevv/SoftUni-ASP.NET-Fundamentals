@@ -17,6 +17,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>()
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<IBookService, BookService>();
+builder.Services.AddTransient<ICategoryService, CategoryService>();
 
 builder.Services.ConfigureApplicationCookie(options =>
 {

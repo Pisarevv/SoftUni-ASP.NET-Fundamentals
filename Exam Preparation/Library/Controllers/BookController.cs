@@ -51,14 +51,14 @@ namespace Library.Controllers
             {
                 var currUserId = User.GetId();
 
-                bool userHaveBook = await bookService.DoesUserHaveBook(currUserId, id);
+                bool userHaveBook = await bookService.DoesUserHaveBookAsync(currUserId, id);
 
                 if(userHaveBook)
                 {
                     return RedirectToAction("All", "Book");
                 }
 
-                await bookService.AddBookToUserCollection(currUserId, id);
+                await bookService.AddBookToUserCollectionAsync(currUserId, id);
 
                 return RedirectToAction("All", "Book");
 
@@ -75,14 +75,14 @@ namespace Library.Controllers
             {
                 var currUserId = User.GetId();
 
-                bool userHaveBook = await bookService.DoesUserHaveBook(currUserId, id);
+                bool userHaveBook = await bookService.DoesUserHaveBookAsync(currUserId, id);
 
                 if (!userHaveBook)
                 {
                     return RedirectToAction("All", "Book");
                 }
 
-                await bookService.RemoveBookFromUserCollection(currUserId, id);
+                await bookService.RemoveBookFromUserCollectionAsync(currUserId, id);
 
                 return RedirectToAction("All", "Book");
 
@@ -93,6 +93,18 @@ namespace Library.Controllers
             }
         }
 
+        public async Task<IActionResult> Add()
+        {
+            try
+            {
+                return View();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
 
     }

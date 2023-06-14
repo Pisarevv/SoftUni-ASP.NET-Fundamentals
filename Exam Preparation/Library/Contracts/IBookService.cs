@@ -8,10 +8,12 @@ namespace Library.Contracts
 
         public Task<ICollection<UserBookViewModel>> GetUserBooksAsync(string userId);
 
-        public Task AddBookToUserCollection(string userId, int bookId);
+        public Task AddBookToUserCollectionAsync(string userId, int bookId);
 
-        public Task RemoveBookFromUserCollection(string userId, int bookId);
+        public Task RemoveBookFromUserCollectionAsync(string userId, int bookId);
 
-        public Task<bool> DoesUserHaveBook(string userId, int bookId);
+        public Task<bool> DoesUserHaveBookAsync(string userId, int bookId);
+
+        public Task AddBookAsync(BookFormViewModel model);
     }
 }
