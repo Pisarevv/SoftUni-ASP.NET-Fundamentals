@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+using Watchlist.Data.Models;
 
 namespace Watchlist.Data
 {
@@ -9,6 +11,12 @@ namespace Watchlist.Data
             : base(options)
         {
         }
+
+        public DbSet<Movie> Movies { get; set; } = null!;
+
+        public DbSet<Genre> Genres { get; set; } = null!;
+
+        public DbSet<IdentityUserMovie> IdentitiyUsersMovies { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -40,6 +48,9 @@ namespace Watchlist.Data
                     Name = "Romantic"
                 });
            */
+
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetAssembly(typeof(WatchlistDbContext)) ?? Assembly.GetExecutingAssembly());
+
             base.OnModelCreating(builder);
         }
     }
