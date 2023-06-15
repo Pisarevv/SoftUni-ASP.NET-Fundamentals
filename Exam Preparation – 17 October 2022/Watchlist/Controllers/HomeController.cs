@@ -7,6 +7,10 @@ namespace Watchlist.Controllers
     {
         public IActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("All", "Movies");
+            }
             return View();
         }
     }

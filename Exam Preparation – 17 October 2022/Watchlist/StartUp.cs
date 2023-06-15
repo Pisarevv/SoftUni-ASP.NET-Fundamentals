@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Watchlist.Contracts;
 using Watchlist.Data;
+using Watchlist.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +21,10 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireUppercase = false;
     options.SignIn.RequireConfirmedEmail = false;
 });
+
+builder.Services.AddTransient<IMovieService,MovieService>();
+builder.Services.AddTransient<IGenreService, GenreService>();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
