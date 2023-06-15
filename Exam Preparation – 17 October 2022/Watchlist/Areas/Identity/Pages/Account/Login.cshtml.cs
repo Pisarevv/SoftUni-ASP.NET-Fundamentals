@@ -81,7 +81,7 @@ namespace Watchlist.Areas.Identity.Pages.Account
         {
             if(User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("All", "Book");
+                return RedirectToAction("All", "Movies");
             }
             if (!string.IsNullOrEmpty(ErrorMessage))
             {

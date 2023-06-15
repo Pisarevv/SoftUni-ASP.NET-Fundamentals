@@ -25,6 +25,12 @@ builder.Services.Configure<IdentityOptions>(options =>
 builder.Services.AddTransient<IMovieService,MovieService>();
 builder.Services.AddTransient<IGenreService, GenreService>();
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Identity/Account/Login";
+});
+
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
