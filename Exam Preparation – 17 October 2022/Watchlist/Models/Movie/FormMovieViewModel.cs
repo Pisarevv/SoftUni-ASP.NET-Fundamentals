@@ -24,6 +24,6 @@ public class FormMovieViewModel
 
     public int GenreId { get; set; } 
 
-    public ICollection<GenreViewModel> Genres { get; set; } = null!;
+    public ICollection<GenreViewModel>? Genres { get; set; } 
  } 
 
