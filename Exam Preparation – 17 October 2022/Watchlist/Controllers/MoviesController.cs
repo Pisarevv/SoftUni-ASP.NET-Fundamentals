@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Watchlist.Contracts;
 using Watchlist.Extensions;
+using Watchlist.Models.Error;
 using Watchlist.Models.Genre;
 using Watchlist.Models.Movie;
 using static Common.ValidationConstants.Movie;
@@ -25,13 +26,13 @@ public class MoviesController : Controller
         try
         {
             ICollection<AllMoviesViewModel> movies = await movieService.GetAllAsync();
-
+            throw new Exception();
             return View(movies);
         }
         catch (Exception)
         {
 
-            return StatusCode(StatusCodes.Status404NotFound, "An error occurred while processing your request.");
+            return RedirectToAction("Index", "Error", StatusCodes.Status400BadRequest);
         }
     }
 
